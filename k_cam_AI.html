@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Không Nên Cấm AI Trong Lớp Học - Neumorphism</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #e3e9f2 0%, #f0f4f8 50%, #dfe7f0 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .presentation-container {
+            width: 90%;
+            max-width: 1200px;
+            background: #e8eff5;
+            border-radius: 30px;
+            box-shadow: 
+                20px 20px 60px #c5d0db,
+                -20px -20px 60px #ffffff;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .slide {
+            display: none;
+            padding: 50px 40px;
+            min-height: 650px;
+            position: relative;
+            animation: slideIn 0.6s ease-out;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide h1 {
+            color: #2d3748;
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            /* -webkit-text-fill-color: transparent; */
+            background-clip: text;
+        }
+        
+        .slide h2 {
+            color: #2d3748;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            padding: 20px;
+            background: #e8eff5;
+            border-radius: 20px;
+            box-shadow: 
+                inset 8px 8px 16px #d1dce7,
+                inset -8px -8px 16px #ffffff;
+            text-align: center;
+        }
+        
+        .slide h3 {
+            color: #4a5568;
+            font-size: 1.6rem;
+            margin: 25px 0 20px 0;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .slide ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .slide li {
+            margin: 20px 0;
+            padding: 25px 30px;
+            background: #e8eff5;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            transition: all 0.4s ease;
+            box-shadow: 
+                8px 8px 16px #d1dce7,
+                -8px -8px 16px #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slide li:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                12px 12px 24px #c5d0db,
+                -12px -12px 24px #ffffff;
+        }
+        
+        .slide li:active {
+            box-shadow: 
+                inset 4px 4px 8px #d1dce7,
+                inset -4px -4px 8px #ffffff;
+            transform: translateY(0);
+        }
+        
+        .green-list li {
+            background: linear-gradient(135deg, #e8f5e8 0%, #f0f9f0 100%);
+            box-shadow: 
+                8px 8px 16px #cce4cc,
+                -8px -8px 16px #ffffff;
+        }
+        
+        .green-list li:hover {
+            box-shadow: 
+                12px 12px 24px #c2dac2,
+                -12px -12px 24px #ffffff;
+        }
+        
+        .red-list li {
+            background: linear-gradient(135deg, #fdf2f2 0%, #fef5f5 100%);
+            box-shadow: 
+                8px 8px 16px #e8d4d4,
+                -8px -8px 16px #ffffff;
+        }
+        
+        .red-list li:hover {
+            box-shadow: 
+                12px 12px 24px #dccaca,
+                -12px -12px 24px #ffffff;
+        }
+        
+        .rubric-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 30px 0;
+            background: #e8eff5;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 
+                12px 12px 24px #d1dce7,
+                -12px -12px 24px #ffffff;
+        }
+        
+        .rubric-table th, .rubric-table td {
+            padding: 20px 25px;
+            text-align: left;
+            border: none;
+        }
+        
+        .rubric-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .rubric-table td {
+            background: #f5f9fd;
+        }
+        
+        .rubric-table tr:nth-child(even) td {
+            background: #eff6fc;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            padding: 15px 25px;
+            background: #e8eff5;
+            color: #4a5568;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 
+                8px 8px 16px #d1dce7,
+                -8px -8px 16px #ffffff;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                12px 12px 24px #c5d0db,
+                -12px -12px 24px #ffffff;
+        }
+        
+        .nav-btn:active {
+            transform: translateY(0);
+            box-shadow: 
+                inset 4px 4px 8px #d1dce7,
+                inset -4px -4px 8px #ffffff;
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 
+                4px 4px 8px #d1dce7,
+                -4px -4px 8px #ffffff;
+        }
+        
+        .slide-counter {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            background: #e8eff5;
+            padding: 15px 25px;
+            border-radius: 50px;
+            color: #4a5568;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 
+                8px 8px 16px #d1dce7,
+                -8px -8px 16px #ffffff;
+        }
+        
+        .highlight {
+            background: #e8eff5;
+            padding: 30px;
+            border-radius: 25px;
+            margin: 30px 0;
+            box-shadow: 
+                inset 6px 6px 12px #d1dce7,
+                inset -6px -6px 12px #ffffff;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+        }
+        
+        .highlight::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 25px;
+            z-index: -1;
+        }
+        
+        .ai-demo {
+            background: #e8eff5;
+            padding: 30px;
+            border-radius: 25px;
+            margin: 30px 0;
+            text-align: center;
+            position: relative;
+            box-shadow: 
+                12px 12px 24px #d1dce7,
+                -12px -12px 24px #ffffff;
+        }
+        
+        .ai-demo::before {
+            content: "🤖";
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 15px;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+        }
+        
+        .conclusion-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 25px;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 
+                15px 15px 30px #c5d0db,
+                -15px -15px 30px #ffffff;
+            position: relative;
+        }
+        
+        .conclusion-box h3 {
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .floating-element {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: #e8eff5;
+            border-radius: 50%;
+            box-shadow: 
+                8px 8px 16px #d1dce7,
+                -8px -8px 16px #ffffff;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-element:nth-child(1) {
+            top: 10%;
+            right: 10%;
+            animation-delay: 0s;
+        }
+        
+        .floating-element:nth-child(2) {
+            bottom: 15%;
+            left: 8%;
+            animation-delay: 2s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .icon-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: #e8eff5;
+            border-radius: 50%;
+            margin: 10px;
+            font-size: 1.5rem;
+            color: #667eea;
+            box-shadow: 
+                6px 6px 12px #d1dce7,
+                -6px -6px 12px #ffffff;
+            transition: all 0.3s ease;
+        }
+        
+        .icon-button:hover {
+            box-shadow: 
+                inset 3px 3px 6px #d1dce7,
+                inset -3px -3px 6px #ffffff;
+        }
+        
+        /* Soft glow effect */
+        .glow {
+            position: relative;
+        }
+        
+        .glow::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: inherit;
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .glow:hover::after {
+            opacity: 1;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px 20px;
+            }
+            
+            .slide h1 {
+                font-size: 2rem;
+            }
+            
+            .slide h2 {
+                font-size: 1.6rem;
+            }
+            
+            .presentation-container {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container glow">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">8</span>
+        </div>
+        
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <h1>🚀 KHÔNG NÊN CẤM AI TRONG LỚP HỌC</h1>
+            <div class="highlight">
+                <h3>Những vấn đề xã hội & đạo đức nghề nghiệp</h3>
+                <p style="font-size: 1.2rem; text-align: center; margin-top: 20px;">
+                    <strong>Nhóm 2</strong>
+                </p>
+            </div>
+            <div class="ai-demo glow">
+                <p style="font-size: 1.4rem; color: #2d3748; font-weight: 600;">
+                    "AI không phải là kẻ thù của giáo dục, mà là đối tác giúp sinh viên học tập hiệu quả hơn!"
+                </p>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <div class="icon-button">💡</div>
+                <div class="icon-button">🎯</div>
+                <div class="icon-button">🚀</div>
+            </div>
+        </div>
+        
+        <!-- Slide 2: Why Important -->
+        <div class="slide">
+            <h2>🎯 Tại sao chủ đề này quan trọng?</h2>
+            <ul>
+                <li class="glow">🔧 <strong>AI đã gắn liền với công cụ học tập:</strong> IDE, Github Copilot, ChatGPT đã trở thành phần không thể thiếu trong lập trình hiện đại</li>
+                <li class="glow">🚫 <strong>Cấm tuyệt đối = Không thực tế:</strong> Giống như bắt sinh viên lập trình mà không cho dùng Google hay Stack Overflow!</li>
+                <li class="glow">🎓 <strong>Mục tiêu giáo dục CNTT:</strong> Không phải học thuộc lòng syntax, mà là giải quyết vấn đề + tư duy phản biện</li>
+                <li class="glow">💡 <strong>Giải pháp tốt nhất:</strong> Thay vì cấm, hãy hướng dẫn sinh viên sử dụng AI đúng cách và có trách nhiệm</li>
+            </ul>
+        </div>
+        
+        <!-- Slide 3: Principles -->
+        <div class="slide">
+            <h2>📋 Nguyên tắc sử dụng AI</h2>
+            <ul>
+                <li class="glow">✅ <strong>Cho phép nhưng có kiểm soát:</strong> Sử dụng AI minh bạch, có trách nhiệm, không vi phạm bảo mật thông tin</li>
+                <li class="glow">🔍 <strong>Sinh viên phải kiểm chứng:</strong> Chạy test, benchmark, debug để xác minh tính đúng đắn của kết quả AI</li>
+                <li class="glow">⚖️ <strong>Đảm bảo công bằng:</strong> Đánh giá qua quy trình làm việc, lịch sử git, hoặc vấn đáp trực tiếp</li>
+            </ul>
+            <div class="highlight glow">
+                <h3>🤝 Quan trọng nhất: Minh bạch và trách nhiệm</h3>
+                <p style="font-size: 1.2rem; text-align: center;">AI là công cụ hỗ trợ tư duy, không phải thay thế hoàn toàn khả năng suy nghĩ của sinh viên</p>
+            </div>
+        </div>
+        
+        <!-- Slide 4: Benefits -->
+        <div class="slide">
+            <h2>🚀 Lợi ích khi KHÔNG cấm AI</h2>
+            <ul>
+                <li class="glow">📈 <strong>Tăng năng suất đáng kể:</strong> AI gợi ý code template, boilerplate, snippet và hỗ trợ debug nhanh chóng</li>
+                <li class="glow">⚡ <strong>Tăng tốc độ học tập:</strong> Tóm tắt tài liệu phức tạp, so sánh nhiều approach khác nhau một cách trực quan</li>
+                <li class="glow">💎 <strong>Nâng cao chất lượng code:</strong> Hỗ trợ refactor, code review, linting và tự động generate test cases</li>
+                <li class="glow">🧠 <strong>Phát triển tư duy:</strong> Học cách đặt câu hỏi đúng, phân tích và đánh giá kết quả một cách phản biện</li>
+            </ul>
+            <div class="ai-demo glow">
+                <p style="font-size: 1.3rem; color: #2d3748;"><strong>Ví dụ thực tế:</strong> Thay vì mất 2 giờ tìm hiểu cú pháp mới, sinh viên tập trung 30 phút hiểu logic và 1.5 giờ cải thiện thuật toán!</p>
+            </div>
+        </div>
+        
+        <!-- Slide 5: Green List -->
+        <div class="slide">
+            <h2>✅ Sử dụng hợp lệ (Green List)</h2>
+            <ul class="green-list">
+                <li class="glow">📚 <strong>Tra cứu cú pháp và API:</strong> Tìm hiểu syntax mới, documentation, tóm tắt tài liệu kỹ thuật</li>
+                <li class="glow">🧪 <strong>Brainstorm test cases:</strong> Nhờ AI đề xuất các trường hợp kiểm thử, edge cases và corner cases</li>
+                <li class="glow">🔧 <strong>Code review và refactoring:</strong> Cải thiện chất lượng code, tối ưu performance, giải thích time complexity</li>
+                <li class="glow">💡 <strong>Thảo luận ý tưởng:</strong> So sánh các design patterns, architecture approaches khác nhau</li>
+                <li class="glow">🐛 <strong>Debug assistance:</strong> Phân tích lỗi, gợi ý hướng fix và explain error messages</li>
+            </ul>
+            <div class="highlight glow">
+                <h3>🎯 Nguyên tắc vàng: Luôn hiểu và kiểm chứng mọi thứ AI đề xuất!</h3>
+            </div>
+        </div>
+        
+        <!-- Slide 6: Red List -->
+        <div class="slide">
+            <h2>❌ Sử dụng không hợp lệ (Red List)</h2>
+            <ul class="red-list">
+                <li class="glow">📋 <strong>Copy-paste mù quáng:</strong> Sao chép nguyên xi code AI tạo ra mà không hiểu logic, không test</li>
+                <li class="glow">🏴‍☠️ <strong>Không trích dẫn nguồn:</strong> Sử dụng code/algorithm mà không ghi credit hoặc reference</li>
+                <li class="glow">🔐 <strong>Lộ thông tin nhạy cảm:</strong> Upload API keys, passwords, proprietary code lên AI công cộng</li>
+                <li class="glow">🎭 <strong>Gian lận học thuật:</strong> Nộp bài assignment hoàn toàn do AI làm mà claim là của mình</li>
+                <li class="glow">🤖 <strong>Dependency quá mức:</strong> Không thể code gì mà không có AI, mất khả năng tư duy độc lập</li>
+            </ul>
+            <div class="highlight glow" style="background: linear-gradient(135deg, #fdf2f2 0%, #fef5f5 100%);">
+                <h3 style="color: #c53030;">⚠️ Hậu quả nghiêm trọng: Điểm 0, mất uy tín, và quan trọng nhất là mất đi cơ hội học tập thật sự!</h3>
+            </div>
+        </div>
+        
+        <!-- Slide 7: Assessment Policy -->
+        <div class="slide">
+            <h2>📊 Chính sách đánh giá chi tiết</h2>
+            <h3>📝 Yêu cầu bắt buộc cho bài nộp:</h3>
+            <ul>
+                <li class="glow"><strong>AI Use Statement:</strong> Document chi tiết sử dụng AI ở đâu, như thế nào, vì mục đích gì</li>
+                <li class="glow"><strong>Test Coverage:</strong> Unit tests, integration tests và validation logs đầy đủ</li>
+                <li class="glow"><strong>Git History:</strong> Commit messages rõ ràng, branches hợp lý, thể hiện quá trình development</li>
+                <li class="glow"><strong>Code Review:</strong> Self-review comments và explanation cho complex logic</li>
+            </ul>
+            
+            <h3>🎯 Rubric chấm điểm cụ thể:</h3>
+            <table class="rubric-table glow">
+                <thead>
+                    <tr>
+                        <th>Tiêu chí đánh giá</th>
+                        <th>Tỷ trọng</th>
+                        <th>Mô tả chi tiết</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Kỹ thuật (Technical)</strong></td>
+                        <td>40%</td>
+                        <td>Code quality, algorithm efficiency, architecture design</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Quy trình (Process)</strong></td>
+                        <td>30%</td>
+                        <td>Git workflow, documentation, collaboration, project management</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kiểm chứng (Validation)</strong></td>
+                        <td>20%</td>
+                        <td>Testing coverage, error handling, performance benchmarks</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Phản tư (Reflection)</strong></td>
+                        <td>10%</td>
+                        <td>AI usage reflection, learning insights, improvement plans</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Slide 8: Conclusion -->
+        <div class="slide">
+            <h2>🎉 Kết luận và cam kết</h2>
+            <div class="conclusion-box glow">
+                <h3>💪 Tuyên ngôn của chúng ta:</h3>
+                <p style="font-size: 1.3rem; line-height: 1.8;">
+                    ✅ <strong>Embrace AI</strong> - Không cấm mà dạy cách sử dụng đúng<br>
+                    ✅ <strong>Process-focused</strong> - Đánh giá dựa trên tư duy và quy trình<br>
+                    ✅ <strong>Academic Integrity</strong> - Duy trì đạo đức và bảo mật<br>
+                    ✅ <strong>AI as Assistant</strong> - Hỗ trợ học tập, không thay thế tư duy
+                </p>
+            </div>
+            
+            <div class="ai-demo glow">
+                <p style="font-size: 1.4rem; color: #2d3748; font-weight: 700;">
+                    "Tương lai thuộc về những người biết cách<br>
+                    <span style="color: #667eea;">COLLABORATE WITH AI</span>,<br>
+                    không phải <span style="color: #e53e3e;">REPLACED BY AI</span>!"
+                </p>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <h3 style="color: #667eea; font-size: 1.8rem;">🙋‍♀️ Sẵn sàng cho Q&A Session!</h3>
+                <div style="margin-top: 20px;">
+                    <div class="icon-button">💬</div>
+                    <div class="icon-button">🤔</div>
+                    <div class="icon-button">✨</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="navigation">
+        <button class="nav-btn glow" id="prevBtn" onclick="changeSlide(-1)">← Trước</button>
+        <button class="nav-btn glow" id="nextBtn" onclick="changeSlide(1)">Tiếp →</button>
+    </div>
+    
+    <script>
+        let currentSlide = 1;
+        const totalSlides = document.querySelectorAll('.slide').length;
+        
+        document.getElementById('total-slides').textContent = totalSlides;
+        
+        function updateSlideCounter() {
+            document.getElementById('current-slide').textContent = currentSlide;
+        }
+        
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            
+            if (n > totalSlides) currentSlide = 1;
+            if (n < 1) currentSlide = totalSlides;
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[currentSlide - 1].classList.add('active');
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = currentSlide === 1;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+            
+            updateSlideCounter();
+        }
+        
+        function changeSlide(n) {
+            currentSlide += n;
+            showSlide(currentSlide);
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') changeSlide(-1);
+            if (event.key === 'ArrowRight') changeSlide(1);
+            if (event.key === 'Escape') {
+                // Toggle fullscreen
+                if (document.fullscreenElement) {
+                    document.exitFullscreen();
+                } else {
+                    document.documentElement.requestFullscreen();
+                }
+            }
+        });
+        
+        // Touch gestures for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.addEventListener('touchstart', function(event) {
+            touchStartX = event.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', function(event) {
+            touchEndX = event.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) changeSlide(1); // Swipe left
+            if (touchEndX > touchStartX + 50) changeSlide(-1); // Swipe right
+        }
+        
+        // Initialize
+        showSlide(currentSlide);
+        
+        // Add some interactive effects
+        document.querySelectorAll('.glow').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
